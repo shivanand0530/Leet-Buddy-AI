@@ -7,7 +7,7 @@ This project is an AI-powered coding mentor web app designed to help users maste
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
-git clone https://github.com/shivanand0530/LeetBuddy-AI
+git clone https://github.com/shivanand0530/Leet-Buddy-AI.git
 
 # Step 2: Navigate to the project directory.
 cd Leet-buddy-AI

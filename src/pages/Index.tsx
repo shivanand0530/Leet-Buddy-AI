@@ -50,7 +50,7 @@ const Index = () => {
                 AI-Powered
               </Badge>
               <a
-                href="https://github.com/shivanand0530/LeetBuddy-AI"
+                href="https://github.com/shivanand0530/Leet-Buddy-AI.git"
                 target="_blank"
                 rel="noopener noreferrer"
               >
