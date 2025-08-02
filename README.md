@@ -1,3 +1,9 @@
+## LeetBuddy-AI images
+![image alt](https://github.com/shivanand0530/Leet-Buddy-AI/blob/98926733b263b9dd7e157e2cf2dc2aefea8150c2/Screenshot%202025-08-01%20184148.png)
+![image alt](https://github.com/shivanand0530/Leet-Buddy-AI/blob/98926733b263b9dd7e157e2cf2dc2aefea8150c2/Screenshot%202025-08-01%20184227.png)
+![image alt](https://github.com/shivanand0530/Leet-Buddy-AI/blob/98926733b263b9dd7e157e2cf2dc2aefea8150c2/Screenshot%202025-08-01%20184243.png)
+![image alt](https://github.com/shivanand0530/Leet-Buddy-AI/blob/98926733b263b9dd7e157e2cf2dc2aefea8150c2/Screenshot%202025-08-01%20184557.png)
+![image alt](https://github.com/shivanand0530/Leet-Buddy-AI/blob/98926733b263b9dd7e157e2cf2dc2aefea8150c2/Screenshot%202025-08-01%20184636.png)
 
 ## Project info
 This project is an AI-powered coding mentor web app designed to help users master LeetCode problems. Users can upload a problem via URL or text, receive hints, explanations, and code solutions from an AI assistant, and interact through a chat sidebar for personalized guidance. The app is built with React, TypeScript, Vite, Tailwind CSS, and shadcn-ui.
