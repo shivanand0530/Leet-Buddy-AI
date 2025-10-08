@@ -39,6 +39,7 @@ export const AIChatSidebar = ({ problem, onSendMessage }: AIChatSidebarProps) =>
   const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const quickActions = [
     { label: "Get Hint", icon: Lightbulb, category: 'hint' as const },
@@ -56,11 +57,16 @@ export const AIChatSidebar = ({ problem, onSendMessage }: AIChatSidebarProps) =>
     // Add more as needed
   ];
 
+  // Auto-scroll to bottom when new messages are added
   useEffect(() => {
-    if (scrollAreaRef.current) {
-      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
-    }
-  }, [messages]);
+    const scrollToBottom = () => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+    
+    // Small delay to ensure DOM is updated
+    const timeoutId = setTimeout(scrollToBottom, 100);
+    return () => clearTimeout(timeoutId);
+  }, [messages, isTyping]);
 
   const sendMessage = async (content: string, category?: Message['category']) => {
     if (!content.trim()) return;
@@ -82,10 +88,41 @@ export const AIChatSidebar = ({ problem, onSendMessage }: AIChatSidebarProps) =>
     // Compose prompt for Gemini
     let prompt = content;
     if (problem) {
-      prompt = `Problem: ${problem.title}\n${problem.description}\n\nUser: ${content}`;
-      if (category === "hint") prompt = `Give me a very simple and beginner-friendly hint for this problem. Use plain language and avoid technical jargon. Keep it short and easy to follow.\n\n${prompt}`;
-      if (category === "explanation") prompt = `Explain the approach to solve this problem in a simple way for a beginner. Use step-by-step instructions and plain language. Avoid advanced terms and keep it easy to understand.\n\n${prompt}`;
-      if (category === "code")  prompt = `Show a simple code solution for this problem that a beginner can understand. Explain each step in plain language and also give optimal code with simple explaination \n\n${prompt}`;
+      const basePrompt = `Problem: ${problem.title}\n${problem.description}\n\nUser: ${content}`;
+      
+      if (category === "hint") {
+        prompt = `Give me ONE simple hint for this problem in 1-2 sentences. Use plain language like talking to a friend. No technical jargon.\n\n${basePrompt}`;
+      } else if (category === "explanation") {
+        prompt = `Explain the solution approach in SHORT, SIMPLE steps (max 4 steps). Use everyday language and include a small example with numbers. Format like this:
+
+**Quick Approach:**
+1. [Step 1 with example]
+2. [Step 2 with example] 
+3. [Step 3 with example]
+
+**Example:** [Show with actual numbers like [2,7,11,15], target=9]
+
+**Time:** O(?) - explain in simple terms
+**Space:** O(?) - explain in simple terms
+
+Keep it SHORT and PRACTICAL.\n\n${basePrompt}`;
+      } else if (category === "code") {
+        prompt = `Show a clean code solution with SHORT comments explaining each line. Keep it simple and readable. Include a quick example walkthrough with actual numbers.
+
+Format:
+\`\`\`python
+# Short comment
+code here
+\`\`\`
+
+**Example walkthrough:** [Show with numbers]
+**Time:** O(?) **Space:** O(?)
+
+Keep explanations SHORT and PRACTICAL.\n\n${basePrompt}`;
+      } else {
+        // For general questions, keep it conversational and short
+        prompt = `${basePrompt}\n\nAnswer in a conversational, friendly way. Keep it short and practical. Use examples with actual numbers when helpful.`;
+      }
     }
 
     try {
@@ -287,6 +324,9 @@ export const AIChatSidebar = ({ problem, onSendMessage }: AIChatSidebarProps) =>
             {error && (
               <div className="text-red-500 text-xs">{error}</div>
             )}
+
+            {/* Invisible element to scroll to */}
+            <div ref={messagesEndRef} />
 
           </div>
         </ScrollArea>

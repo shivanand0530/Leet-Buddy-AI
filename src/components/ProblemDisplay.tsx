@@ -2,6 +2,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { ComplexityAnalysis } from "@/components/ComplexityAnalysis";
 import { BookOpen, Target, Tag, Lightbulb } from "lucide-react";
 
 interface ProblemDisplayProps {
@@ -119,6 +120,13 @@ export const ProblemDisplay = ({ problem, onRequestHint }: ProblemDisplayProps) 
           Get AI Hint
         </Button>
       </CardContent>
+      
+      {/* Complexity Analysis */}
+      {problem.suggestedApproaches && (
+        <div className="mt-6">
+          <ComplexityAnalysis approaches={problem.suggestedApproaches} />
+        </div>
+      )}
     </Card>
   );
 };

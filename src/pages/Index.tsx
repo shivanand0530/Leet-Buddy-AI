@@ -5,10 +5,20 @@ import { AIChatSidebar } from "@/components/AIChatSidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Brain, Code, Zap, Target, Github, Star } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/contexts/AuthContext";
+import { Brain, Code, Zap, Target, Github, Star, LogOut, User, ChevronDown } from "lucide-react";
 
 const Index = () => {
   const [currentProblem, setCurrentProblem] = useState(null);
+  const { user, signOut } = useAuth();
 
   const handleProblemDetected = (problem: any) => {
     setCurrentProblem(problem);
@@ -36,7 +46,7 @@ const Index = () => {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-foreground">
-                  LeetBuddy AI
+                  CodeFlux AI
                 </h1>
                 <p className="text-sm text-muted-foreground">
                   Your AI-powered coding mentor
@@ -59,6 +69,42 @@ const Index = () => {
                   GitHub
                 </Button>
               </a>
+              
+              {/* User Profile Dropdown */}
+              <div className="border-l border-border pl-4">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="flex items-center gap-2 h-10 hover:bg-muted">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <User className="h-4 w-4 text-white" />
+                      </div>
+                      <div className="hidden sm:flex flex-col items-start">
+                        <span className="text-sm font-medium text-foreground">
+                          {user?.email?.split('@')[0] }
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                          {user?.email || 'user@example.com'}
+                        </span>
+                      </div>
+                      <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56" align="end" forceMount>
+                    <DropdownMenuLabel className="font-normal">
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-xs leading-none text-muted-foreground">
+                          {user?.email || 'user@example.com'}
+                        </p>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => signOut()} className="text-red-600 focus:text-red-600">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>Log out</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
             </div>
           </div>
         </div>
@@ -70,63 +116,7 @@ const Index = () => {
           <div className="col-span-1 space-y-6 overflow-y-auto">
             {!currentProblem ? (
               <div className="space-y-6">
-                {/* Welcome Section */}
-                <Card className="border-border bg-gradient-glow">
-                  <CardContent className="p-6">
-                    <div className="text-center space-y-4">
-                      <div className="w-16 h-16 mx-auto rounded-full bg-gradient-ai flex items-center justify-center">
-                        <Target className="h-8 w-8 text-primary-foreground" />
-                      </div>
-                      <div>
-                        <h2 className="text-2xl font-bold text-foreground mb-2">
-                          Welcome to LeetBuddy AI
-                        </h2>
-                        <p className="text-muted-foreground max-w-md mx-auto">
-                          Your intelligent companion for mastering LeetCode
-                          problems. Get hints, explanations, and step-by-step
-                          guidance powered by AI.
-                        </p>
-                      </div>
-
-                      <div className="flex flex-wrap justify-center gap-4 pt-4">
-                        {[
-                          {
-                            icon: Brain,
-                            label: "Smart Hints",
-                            desc: "Progressive difficulty hints",
-                          },
-                          {
-                            icon: Code,
-                            label: "Code Analysis",
-                            desc: "Understand solutions deeply",
-                          },
-                          {
-                            icon: Star,
-                            label: "Personalized",
-                            desc: "Adapted to your level",
-                          },
-                        ].map((feature, index) => (
-                          <div
-                            key={index}
-                            className="text-center space-y-2 max-w-32"
-                          >
-                            <div className="w-12 h-12 mx-auto rounded-lg bg-muted flex items-center justify-center">
-                              <feature.icon className="h-6 w-6 text-primary" />
-                            </div>
-                            <div>
-                              <h3 className="font-semibold text-sm text-foreground">
-                                {feature.label}
-                              </h3>
-                              <p className="text-xs text-muted-foreground">
-                                {feature.desc}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+               
 
                 {/* Problem Input */}
                 <ProblemInput onProblemDetected={handleProblemDetected} />

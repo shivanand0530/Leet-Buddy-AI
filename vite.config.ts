@@ -4,7 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/Leet-Buddy-AI', // If deploying to GitHub Pages
+  base: process.env.NODE_ENV === 'production' ? '/Leet-Buddy-AI/' : '/', // Use GitHub Pages path only for production
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

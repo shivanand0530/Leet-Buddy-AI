@@ -53,8 +53,8 @@ export const ProblemInput = ({ onProblemDetected }: ProblemInputProps) => {
     try {
     const prompt =
       type === "url"
-        ? `Given the following LeetCode problem link: ${input}, extract and return the problem as a JSON object with the following fields: title, difficulty, description, examples (array of {input, output, explanation}), constraints (array), and tags (array). For each example, keep the explanation short and simple, using plain language. Respond ONLY with the JSON object.`
-    : `Given the following LeetCode problem text: ${input}, extract and return the problem as a JSON object with the following fields: title, difficulty, description, examples (array of {input, output, explanation}), constraints (array), and tags (array). For each example, keep the explanation short and simple, using plain language. Respond ONLY with the JSON object.`;
+        ? `Given the following LeetCode problem link: ${input}, extract and return the problem as a JSON object with the following fields: title, difficulty, description, examples (array of {input, output, explanation}), constraints (array), tags (array), and suggestedApproaches (array of {name, timeComplexity, spaceComplexity, description}). For each example, keep the explanation short and simple, using plain language. For suggestedApproaches, include 2-3 common algorithmic approaches with their Big O complexity analysis. Respond ONLY with the JSON object.`
+    : `Given the following LeetCode problem text: ${input}, extract and return the problem as a JSON object with the following fields: title, difficulty, description, examples (array of {input, output, explanation}), constraints (array), tags (array), and suggestedApproaches (array of {name, timeComplexity, spaceComplexity, description}). For each example, keep the explanation short and simple, using plain language. For suggestedApproaches, include 2-3 common algorithmic approaches with their Big O complexity analysis. Respond ONLY with the JSON object.`;
     const geminiResponse = await askGemini(prompt, "en");
     console.log("Gemini Response:", geminiResponse);
 

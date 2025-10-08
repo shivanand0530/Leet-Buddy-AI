@@ -1,24 +1,29 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Routes, Route } from "react-router-dom"; // Remove BrowserRouter
+import { Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-
-const queryClient = new QueryClient();
+import Landing from "./pages/Landing";
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
+  <AuthProvider>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       <Routes>
-        <Route path="/" element={<Index />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/app" element={
+          <ProtectedRoute>
+            <Index />
+          </ProtectedRoute>
+        } />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </TooltipProvider>
-  </QueryClientProvider>
+  </AuthProvider>
 );
 
 export default App;
