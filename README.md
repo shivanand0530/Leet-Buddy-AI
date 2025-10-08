@@ -1,3 +1,10 @@
+# App Screenshots
+
+<img width="240" height="240" alt="Image" src="https://github.com/user-attachments/assets/ff2e78a5-bc53-4491-9f37-d801c73a4b43" />
+<img width="240" height="240" alt="Image" src="https://github.com/user-attachments/assets/b89fa8b6-0e70-4c04-95ec-b32f9573b650" />
+
+
+
 # CodeFlux-AI
 
 An intelligent LeetCode problem-solving assistant powered by AI to help developers practice algorithmic problem-solving with personalized guidance and complexity analysis.
@@ -114,63 +121,3 @@ src/
     └── geminiAPIcall.tsx # Google Gemini AI integration
 ```
 
-## Usage
-
-### For Users
-
-1. **Sign Up/Login**: Create an account or login to access the full features
-2. **Submit Problems**: 
-   - Paste a LeetCode problem URL for automatic parsing
-   - Or directly input problem text for manual analysis
-3. **Get AI Analysis**: Receive detailed breakdowns including:
-   - Problem understanding and constraints
-   - Multiple solution approaches
-   - Time and space complexity analysis
-   - Implementation tips and best practices
-4. **Interactive Chat**: Ask follow-up questions about the problem or solution approaches
-
-### For Developers
-
-The application follows React best practices with:
-- Functional components and hooks
-- TypeScript for type safety
-- Context API for state management
-- Protected routing for authentication
-- Modular component architecture
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## Environment Setup
-
-### Required API Keys
-
-- **Supabase**: For user authentication and data storage
-- **Google Gemini AI**: For problem analysis and chat functionality
-
-### Development Environment
-
-- Recommended IDE: VS Code with TypeScript and React extensions
-- Node.js version: 16+ (with Bun package manager)
-- Git for version control
-
-## License
-
-This project is private and not licensed for public use.
-
-## Support
-
-For support, please open an issue in the GitHub repository or contact the development team.
-
-## Acknowledgments
-
-- Google Gemini AI for intelligent problem analysis
-- Supabase for backend infrastructure
-- Radix UI for accessible component primitives
-- Tailwind CSS for rapid UI development
-- The open-source community for the amazing tools and libraries
